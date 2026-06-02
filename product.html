@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Product Details</title>
+
+<link rel="icon" type="image/png" href="images/web-logo.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            <img src="images/logo.png"
+                 alt="Smurfee Logo">
+        </div>
+
+        <div class="header-icons">
+
+            <a href="index.html">🏠</a>
+
+            <a href="cart.html">🛒</a>
+
+            <a href="wishlist.html">❤️</a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<section class="product-page">
+
+    <div id="productDetails"></div>
+
+</section>
+
+<script src="cart.js"></script>
+<script src="products.js"></script>
+
+<script>
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const id =
+    Number(
+        params.get("id")
+    );
+
+const product =
+    products.find(
+        p => p.id === id
+    );
+
+const container =
+    document.getElementById(
+        "productDetails"
+    );
+
+if(product){
+
+container.innerHTML = `
+
+<div class="product-layout">
+
+    <div>
+
+        <img
+            src="${product.image}"
+            class="product-image"
+        >
+
+    </div>
+
+    <div>
+
+        <h1>
+            ${product.name}
+        </h1>
+
+        <div class="rating">
+            ${"⭐".repeat(product.rating)}
+        </div>
+
+        <p class="seller">
+            Sold by:
+            ${product.seller}
+        </p>
+
+        <p class="price">
+            ₱${product.price}
+        </p>
+
+        <p>
+            🚚 Free Shipping
+        </p>
+
+        <p>
+            Sold:
+            ${product.sold}
+        </p>
+
+        <div class="qty-box">
+
+            <button onclick="decreaseQty()">
+                -
+            </button>
+
+            <span id="qty">
+                1
+            </span>
+
+            <button onclick="increaseQty()">
+                +
+            </button>
+
+        </div>
+
+        <br>
+
+        <div class="product-buttons">
+
+            <button
+                class="btn"
+                onclick="
+                addProductQty(
+                '${product.name}',
+                ${product.price},
+                qty
+                )"
+            >
+                🛒 Add To Cart
+            </button>
+
+            <button
+                class="wishlist-btn"
+                onclick="
+                addToWishlist(
+                '${product.name}',
+                ${product.price}
+                )"
+            >
+                ❤️ Wishlist
+            </button>
+
+        </div>
+
+        <div class="reviews-section">
+
+            <h3>
+                ⭐ Product Reviews
+            </h3>
+
+            <div class="review-form">
+
+                <select id="reviewRating">
+
+                    <option value="5">
+                        ⭐⭐⭐⭐⭐
+                    </option>
+
+                    <option value="4">
+                        ⭐⭐⭐⭐
+                    </option>
+
+                    <option value="3">
+                        ⭐⭐⭐
+                    </option>
+
+                    <option value="2">
+                        ⭐⭐
+                    </option>
+
+                    <option value="1">
+                        ⭐
+                    </option>
+
+                </select>
+
+                <textarea
+                    id="reviewText"
+                    placeholder="Write your review..."
+                ></textarea>
+
+                <button
+                    class="btn"
+                    onclick="submitReview(${product.id})"
+                >
+                    Submit Review
+                </button>
+
+            </div>
+
+            <div id="reviewList"></div>
+
+        </div>
+
+
+
+            <h3>Description</h3>
+
+            <p>
+                High-quality
+                ${product.name}
+                from
+                ${product.seller}.
+                Perfect for daily use.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+let qty = 1;
+
+function increaseQty(){
+
+    qty++;
+
+    document.getElementById(
+        "qty"
+    ).innerText = qty;
+}
+
+function decreaseQty(){
+
+    if(qty > 1){
+
+        qty--;
+
+        document.getElementById(
+            "qty"
+        ).innerText = qty;
+    }
+}
+
+function getReviews(productId){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "reviews_" + productId
+        )
+    ) || [];
+
+}
+
+function submitReview(productId){
+
+    const rating =
+        document.getElementById(
+            "reviewRating"
+        ).value;
+
+    const text =
+        document.getElementById(
+            "reviewText"
+        ).value.trim();
+
+    if(text === ""){
+
+        alert(
+            "Please write a review."
+        );
+
+        return;
+    }
+
+    const reviews =
+        getReviews(productId);
+
+    reviews.push({
+
+        rating,
+        text,
+
+        date:
+        new Date()
+        .toLocaleString()
+
+    });
+
+    localStorage.setItem(
+
+        "reviews_" + productId,
+
+        JSON.stringify(
+            reviews
+        )
+
+    );
+
+    document.getElementById(
+        "reviewText"
+    ).value = "";
+
+    loadReviews(productId);
+
+}
+
+function loadReviews(productId){
+
+    const container =
+        document.getElementById(
+            "reviewList"
+        );
+
+    const reviews =
+        getReviews(productId);
+
+    container.innerHTML = "";
+
+    if(reviews.length === 0){
+
+        container.innerHTML =
+        "<p>No reviews yet.</p>";
+
+        return;
+    }
+
+    let total = 0;
+
+    reviews
+    .slice()
+    .reverse()
+    .forEach(review => {
+
+        total +=
+        Number(review.rating);
+
+        container.innerHTML += `
+
+        <div class="review-card">
+
+            <div>
+                ${"⭐".repeat(
+                    review.rating
+                )}
+            </div>
+
+            <p>
+                ${review.text}
+            </p>
+
+            <small>
+                ${review.date}
+            </small>
+
+        </div>
+
+        `;
+    });
+
+    const avg =
+        (
+            total /
+            reviews.length
+        )
+        .toFixed(1);
+
+    container.innerHTML = `
+
+    <div class="average-rating">
+
+        Average Rating:
+        ⭐ ${avg}/5
+        (${reviews.length}
+        reviews)
+
+    </div>
+
+    ` + container.innerHTML;
+
+}
+
+loadReviews(id);
+
+
+
+</script>
+<footer>
+    <p>
+        © 2026 Smurfee Marketplace
+    </p>
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Orders - Smurfee</title>
+
+<link rel="icon" type="image/png" href="images/web-logo.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            <img src="images/logo.png"
+                 alt="Smurfee Logo">
+        </div>
+
+        <div class="header-actions">
+
+            <a href="index.html" class="nav-btn">
+                🏠 Home
+            </a>
+
+            <a href="cart.html" class="nav-btn">
+                🛒 Cart
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- PAGE HERO -->
+
+<section class="orders-hero">
+
+    <h1>📦 My Orders</h1>
+
+    <p>
+        Track your purchases and view
+        your Smurfee order history.
+    </p>
+
+</section>
+
+<!-- ORDERS -->
+
+<section class="orders-container">
+
+    <div class="orders-header">
+
+        <h2>
+            Recent Orders
+        </h2>
+
+    </div>
+
+    <div id="orderHistory"></div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Smurfee Marketplace
+    </p>
+
+</footer>
+
+<script src="cart.js"></script>
+
+<script>
+displayOrders();
+</script>
+
+</body>

@@ -1,0 +1,329 @@
+const products = [
+
+{
+    id: 1,
+    name: "Gaming Monitor",
+    price: 7999,
+    image: "images/gaming-monitor.jpg",
+    category: "Gaming",
+    seller: "Papa Smurf Tech",
+    rating: 5,
+    sold: "2.4k"
+},
+
+{
+    id: 2,
+    name: "External SSD 1TB",
+    price: 4299,
+    image: "images/ssd.jpg",
+    category: "Computers",
+    seller: "Brainy Gadget Store",
+    rating: 5,
+    sold: "1.1k"
+},
+
+{
+    id: 3,
+    name: "USB-C Hub Pro",
+    price: 899,
+    image: "images/usb-hub.jpg",
+    category: "Accessories",
+    seller: "Smurf Village Electronics",
+    rating: 4,
+    sold: "800"
+},
+
+{
+    id: 4,
+    name: "Noise Cancelling Earbuds",
+    price: 1599,
+    image: "images/earbuds.jpg",
+    category: "Audio",
+    seller: "Harmony Audio",
+    rating: 5,
+    sold: "1.5k"
+},
+
+{
+    id: 5,
+    name: "Smartphone Stand Pro",
+    price: 299,
+    image: "images/cellphone-stand.jpg",
+    category: "Accessories",
+    seller: "Smurf Gadgets",
+    rating: 4,
+    sold: "3k"
+},
+
+{
+    id: 6,
+    name: "Gaming Desk",
+    price: 6499,
+    image: "images/gaming-desk.jpg",
+    category: "Gaming",
+    seller: "Papa Smurf Tech",
+    rating: 5,
+    sold: "900"
+},
+
+{
+    id: 7,
+    name: "Gaming Mouse",
+    price: 799,
+    image: "images/mouse.jpg",
+    category: "Gaming",
+    seller: "Papa Smurf Tech",
+    rating: 5,
+    sold: "1.2k"
+},
+
+{
+    id: 8,
+    name: "Mechanical Keyboard",
+    price: 1499,
+    image: "images/keyboard.jpg",
+    category: "Gaming",
+    seller: "Brainy Gadget Store",
+    rating: 5,
+    sold: "850"
+},
+
+{
+    id: 9,
+    name: "Wireless Headset",
+    price: 1299,
+    image: "images/wireless-headset.jpg",
+    category: "Audio",
+    seller: "Harmony Audio",
+    rating: 5,
+    sold: "1.7k"
+},
+
+{
+    id: 10,
+    name: "Smart Watch",
+    price: 2499,
+    image: "images/smartwatch.jpg",
+    category: "Wearables",
+    seller: "Smurf Wearables",
+    rating: 4,
+    sold: "1.4k"
+},
+
+{
+    id: 11,
+    name: "Gaming Chair",
+    price: 5999,
+    image: "images/gaming-chair.jpg",
+    category: "Gaming",
+    seller: "Papa Smurf Tech",
+    rating: 5,
+    sold: "650"
+},
+
+{
+    id: 12,
+    name: "RGB Mouse Pad",
+    price: 399,
+    image: "images/rgb-mousepad.jpg",
+    category: "Gaming",
+    seller: "Smurf Gadgets",
+    rating: 4,
+    sold: "2.2k"
+},
+
+{
+    id: 13,
+    name: "Bluetooth Speaker",
+    price: 1099,
+    image: "images/speaker.jpg",
+    category: "Audio",
+    seller: "Harmony Audio",
+    rating: 5,
+    sold: "1.9k"
+},
+
+{
+    id: 14,
+    name: "Phone Stand",
+    price: 199,
+    image: "images/phone-stand.jpg",
+    category: "Accessories",
+    seller: "Smurf Gadgets",
+    rating: 4,
+    sold: "4k"
+},
+
+{
+    id: 15,
+    name: "USB Hub",
+    price: 499,
+    image: "images/usb-hubv1.jpg",
+    category: "Accessories",
+    seller: "Brainy Gadget Store",
+    rating: 4,
+    sold: "2.6k"
+},
+
+{
+    id: 16,
+    name: "Webcam HD",
+    price: 1799,
+    image: "images/webcam.jpg",
+    category: "Computers",
+    seller: "Smurf Village Electronics",
+    rating: 5,
+    sold: "1k"
+}
+
+];
+
+function renderProducts() {
+
+    const container = document.getElementById("productGrid");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    products.forEach(product => {
+
+        container.innerHTML += `
+        <div class="card">
+
+            <img src="${product.image}">
+
+            <div class="card-body">
+
+                
+                <h3>
+                    <a href="product.html?id=${product.id}"
+                    class="product-link">
+                        ${product.name}
+                    </a>
+                </h3>
+
+
+
+                <div class="rating">
+                    ${"⭐".repeat(product.rating)}
+                </div>
+
+                <p class="sold">
+                    Sold ${product.sold}
+                </p>
+
+                <p class="seller">
+                    ${product.seller}
+                </p>
+
+                <p class="shipping">
+                    🚚 Free Shipping
+                </p>
+
+                <p class="price">
+                    ₱${product.price}
+                </p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="wishlist-btn"
+                        onclick="addToWishlist('${product.name}',${product.price})"
+                    >
+                        ❤️
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="addToCart('${product.name}',${product.price})"
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    renderProducts
+);
+
+function filterCategory(category){
+
+    const container =
+        document.getElementById("productGrid");
+
+    container.innerHTML = "";
+
+    let filteredProducts;
+
+    if(category === "All"){
+
+        filteredProducts = products;
+
+    }else{
+
+        filteredProducts =
+            products.filter(
+                product =>
+                product.category === category
+            );
+
+    }
+
+    filteredProducts.forEach(product => {
+
+        container.innerHTML += `
+
+        <div class="card">
+
+            <img src="${product.image}">
+
+            <div class="card-body">
+
+                <h3>
+                    <a href="product.html?id=${product.id}"
+                       class="product-link">
+                       ${product.name}
+                    </a>
+                </h3>
+
+                <div class="rating">
+                    ${"⭐".repeat(product.rating)}
+                </div>
+
+                <p class="seller">
+                    ${product.seller}
+                </p>
+
+                <p class="price">
+                    ₱${product.price}
+                </p>
+
+                <button
+                    class="btn"
+                    onclick="
+                    addToCart(
+                    '${product.name}',
+                    ${product.price}
+                    )"
+                >
+                    Add To Cart
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+}

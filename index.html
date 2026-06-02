@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smurfee</title>
+
+<link rel="icon" type="image/png" href="images/web-logo.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="top-links">
+        <a href="#">Seller Center</a>
+        <a href="#">Flash Deals</a>
+        <a href="#">Categories</a>
+    </div>
+
+    <div class="top-links">
+        <a href="wishlist.html">❤️ Wishlist</a>
+        <a href="order.html">📦 Orders</a>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            <img src="images/logo.png" alt="Smurfee Logo">
+        </div>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products on Smurfee..."
+            >
+        </div>
+
+        <div class="header-icons">
+
+            <a href="wishlist.html">
+                ❤️
+            </a>
+
+            <a href="cart.html">
+                🛒
+                <span id="cartCount">0</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Smurfee Super Sale </h1>
+
+        <p>
+            Discover amazing tech deals from the Smurf Village Marketplace
+        </p>
+
+        <button class="hero-btn">
+            Shop Now
+        </button>
+
+    </div>
+
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+
+    <h2>Categories</h2>
+
+    <div class="category-grid">
+
+        <div class="category" onclick="filterCategory('All')">
+            All
+        </div>
+
+        <div class="category" onclick="filterCategory('Gaming')">
+            Gaming
+        </div>
+
+        <div class="category" onclick="filterCategory('Audio')">
+            Audio
+        </div>
+
+        <div class="category" onclick="filterCategory('Accessories')">
+            Accessories
+        </div>
+
+        <div class="category" onclick="filterCategory('Computers')">
+            Computers
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FLASH DEALS -->
+<section class="flash-deals">
+
+    <div class="flash-header">
+
+        <h2>⚡ Flash Deals</h2>
+
+        <div id="countdown">
+            02:00:00
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+
+    <h2 class="section-title">
+        Featured Products
+    </h2>
+
+    <div class="product-grid" id="productGrid">
+
+        <!-- PRODUCT 1 -->
+        <div class="card">
+
+            <img src="https://via.placeholder.com/300x200">
+
+            <div class="card-body">
+
+                <h3>Gaming Mouse</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+                <p class="sold">
+                    Sold 1.2k
+                </p>
+
+                <p class="seller">
+                    Papa Smurf Tech
+                </p>
+
+                <p class="shipping">
+                    🚚 Free Shipping
+                </p>
+
+                <p class="price">
+                    ₱799
+                </p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="wishlist-btn"
+                        onclick="addToWishlist('Gaming Mouse',799)"
+                    >
+                        ❤️
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="addToCart('Gaming Mouse',799)"
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PRODUCT 2 -->
+        <div class="card">
+
+            <img src="https://via.placeholder.com/300x200">
+
+            <div class="card-body">
+
+                <h3>Mechanical Keyboard</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+                <p class="sold">
+                    Sold 850
+                </p>
+
+                <p class="seller">
+                    Brainy Gadget Store
+                </p>
+
+                <p class="shipping">
+                    🚚 Free Shipping
+                </p>
+
+                <p class="price">
+                    ₱1499
+                </p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="wishlist-btn"
+                        onclick="addToWishlist('Mechanical Keyboard',1499)"
+                    >
+                        ❤️
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="addToCart('Mechanical Keyboard',1499)"
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PRODUCT 3 -->
+        <div class="card">
+
+            <img src="https://via.placeholder.com/300x200">
+
+            <div class="card-body">
+
+                <h3>Gaming Monitor</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+                <p class="sold">
+                    Sold 2.4k
+                </p>
+
+                <p class="seller">
+                    Smurf Village Electronics
+                </p>
+
+                <p class="shipping">
+                    🚚 Free Shipping
+                </p>
+
+                <p class="price">
+                    ₱7999
+                </p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="wishlist-btn"
+                        onclick="addToWishlist('Gaming Monitor',7999)"
+                    >
+                        ❤️
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="addToCart('Gaming Monitor',7999)"
+                    >
+                        Add To Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 Smurfee Marketplace
+    </p>
+
+</footer>
+
+<script src="cart.js"></script>
+<script src="search.js"></script>
+
+<script>
+
+/* FLASH DEAL TIMER */
+
+let seconds = 7200;
+
+setInterval(() => {
+
+    let h = Math.floor(seconds / 3600);
+
+    let m = Math.floor((seconds % 3600) / 60);
+
+    let s = seconds % 60;
+
+    document.getElementById("countdown").innerText =
+        String(h).padStart(2,"0") + ":" +
+        String(m).padStart(2,"0") + ":" +
+        String(s).padStart(2,"0");
+
+    if(seconds > 0){
+        seconds--;
+    }
+
+},1000);
+
+</script>
+<script src="products.js"></script>
+</body>
+</html>
+
