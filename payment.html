@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Smurfee Orders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - Smurfee</title>
 
 <link rel="icon" type="image/png" href="images/web-logo.png">
 
@@ -14,7 +12,6 @@ content="width=device-width, initial-scale=1.0">
 <body>
 
 <header>
-
     <div class="navbar">
 
         <div class="logo">
@@ -39,46 +36,84 @@ content="width=device-width, initial-scale=1.0">
         </div>
 
     </div>
-
 </header>
 
 <section class="cart-container">
 
     <h2 class="section-title">
-        📦 Order History
+        Checkout
     </h2>
 
-    <div class="order-banner">
+    <div class="payment-box">
 
-        <h3>
-            Thank you for shopping
-            with Smurfee 💙
-        </h3>
+        <h3>Choose Payment Method</h3>
 
-        <p>
-            Track your completed,
-            shipped, and processing
-            orders below.
-        </p>
+        <label class="payment-option">
+            <input type="radio" name="payment" value="GCash" checked>
+            💙 GCash
+        </label>
+
+        <label class="payment-option">
+            <input type="radio" name="payment" value="Maya">
+            💚 Maya
+        </label>
+
+        <label class="payment-option">
+            <input type="radio" name="payment" value="Credit Card">
+            💳 Credit Card
+        </label>
+
+        <label class="payment-option">
+            <input type="radio" name="payment" value="Cash on Delivery">
+            📦 Cash on Delivery
+        </label>
 
     </div>
 
-    <div id="orderHistory"></div>
+    <div class="voucher-box">
+
+        <h3>Voucher</h3>
+
+        <input
+            type="text"
+            id="voucherInput"
+            placeholder="Enter voucher code"
+        >
+
+        <button
+            class="btn"
+            onclick="applyVoucher()"
+        >
+            Apply Voucher
+        </button>
+
+        <p id="voucherMessage"></p>
+
+    </div>
+
+    <div class="cart-summary">
+
+        <h3 id="paymentTotal">
+            Total: ₱0
+        </h3>
+
+        <button
+            class="btn"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
+
+    </div>
 
 </section>
-
-<footer>
-    <p>
-        © 2026 Smurfee Marketplace
-    </p>
-</footer>
 
 <script src="cart.js"></script>
 
 <script>
-displayOrders();
+loadPaymentTotal();
 </script>
 
 </body>
 </html>
-```
+
