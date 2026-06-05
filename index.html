@@ -70,7 +70,9 @@
             Discover amazing tech deals from the Smurf Village Marketplace
         </p>
 
-        <button class="hero-btn">
+        <button
+            class="hero-btn"
+            onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
             Shop Now
         </button>
 
@@ -125,166 +127,13 @@
 </section>
 
 <!-- PRODUCTS -->
-<section class="products">
+<section class="products" id="products">
 
     <h2 class="section-title">
         Featured Products
     </h2>
 
     <div class="product-grid" id="productGrid">
-
-        <!-- PRODUCT 1 -->
-        <div class="card">
-
-            <img src="https://via.placeholder.com/300x200">
-
-            <div class="card-body">
-
-                <h3>Gaming Mouse</h3>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p class="sold">
-                    Sold 1.2k
-                </p>
-
-                <p class="seller">
-                    Papa Smurf Tech
-                </p>
-
-                <p class="shipping">
-                    🚚 Free Shipping
-                </p>
-
-                <p class="price">
-                    ₱799
-                </p>
-
-                <div class="card-actions">
-
-                    <button
-                        class="wishlist-btn"
-                        onclick="addToWishlist('Gaming Mouse',799)"
-                    >
-                        ❤️
-                    </button>
-
-                    <button
-                        class="btn"
-                        onclick="addToCart('Gaming Mouse',799)"
-                    >
-                        Add To Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 2 -->
-        <div class="card">
-
-            <img src="https://via.placeholder.com/300x200">
-
-            <div class="card-body">
-
-                <h3>Mechanical Keyboard</h3>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p class="sold">
-                    Sold 850
-                </p>
-
-                <p class="seller">
-                    Brainy Gadget Store
-                </p>
-
-                <p class="shipping">
-                    🚚 Free Shipping
-                </p>
-
-                <p class="price">
-                    ₱1499
-                </p>
-
-                <div class="card-actions">
-
-                    <button
-                        class="wishlist-btn"
-                        onclick="addToWishlist('Mechanical Keyboard',1499)"
-                    >
-                        ❤️
-                    </button>
-
-                    <button
-                        class="btn"
-                        onclick="addToCart('Mechanical Keyboard',1499)"
-                    >
-                        Add To Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 3 -->
-        <div class="card">
-
-            <img src="https://via.placeholder.com/300x200">
-
-            <div class="card-body">
-
-                <h3>Gaming Monitor</h3>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p class="sold">
-                    Sold 2.4k
-                </p>
-
-                <p class="seller">
-                    Smurf Village Electronics
-                </p>
-
-                <p class="shipping">
-                    🚚 Free Shipping
-                </p>
-
-                <p class="price">
-                    ₱7999
-                </p>
-
-                <div class="card-actions">
-
-                    <button
-                        class="wishlist-btn"
-                        onclick="addToWishlist('Gaming Monitor',7999)"
-                    >
-                        ❤️
-                    </button>
-
-                    <button
-                        class="btn"
-                        onclick="addToCart('Gaming Monitor',7999)"
-                    >
-                        Add To Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
 
     </div>
 
