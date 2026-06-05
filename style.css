@@ -249,6 +249,7 @@ section{
     overflow:hidden;
     box-shadow:var(--shadow);
     transition:.25s;
+    cursor: pointer;
 }
 
 .card:hover{
