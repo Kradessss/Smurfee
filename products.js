@@ -189,21 +189,14 @@ function renderProducts() {
     products.forEach(product => {
 
         container.innerHTML += `
-        <div class="card">
+        <div class="card"
+        onclick="window.location.href='product.html?id=${product.id}'">
 
             <img src="${product.image}">
 
             <div class="card-body">
 
-                
-                <h3>
-                    <a href="product.html?id=${product.id}"
-                    class="product-link">
-                        ${product.name}
-                    </a>
-                </h3>
-
-
+                <h3>${product.name}</h3>
 
                 <div class="rating">
                     ${"⭐".repeat(product.rating)}
@@ -229,14 +222,20 @@ function renderProducts() {
 
                     <button
                         class="wishlist-btn"
-                        onclick="addToWishlist('${product.name}',${product.price})"
+                        onclick="
+                        event.stopPropagation();
+                        addToWishlist('${product.name}',${product.price})
+                        "
                     >
                         ❤️
                     </button>
 
                     <button
                         class="btn"
-                        onclick="addToCart('${product.name}',${product.price})"
+                        onclick="
+                        event.stopPropagation();
+                        addToCart('${product.name}',${product.price})
+                        "
                     >
                         Add To Cart
                     </button>
@@ -283,18 +282,14 @@ function filterCategory(category){
 
         container.innerHTML += `
 
-        <div class="card">
+        <div class="card"
+        onclick="window.location.href='product.html?id=${product.id}'">
 
             <img src="${product.image}">
 
             <div class="card-body">
 
-                <h3>
-                    <a href="product.html?id=${product.id}"
-                       class="product-link">
-                       ${product.name}
-                    </a>
-                </h3>
+                <h3>${product.name}</h3>
 
                 <div class="rating">
                     ${"⭐".repeat(product.rating)}
@@ -311,6 +306,7 @@ function filterCategory(category){
                 <button
                     class="btn"
                     onclick="
+                    event.stopPropagation();
                     addToCart(
                     '${product.name}',
                     ${product.price}
