@@ -910,7 +910,6 @@ footer{
 
     display:flex;
     gap:15px;
-
     align-items:center;
 
 }
@@ -988,6 +987,54 @@ footer{
     min-width:140px;
 
     padding:12px;
+
+}
+
+.nav-icon{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:white;
+    text-decoration:none;
+
+    padding:8px 12px;
+    border-radius:8px;
+
+    transition:.2s;
+}
+
+.nav-icon svg{
+    width:22px;
+    height:22px;
+    flex-shrink:0;
+}
+
+.nav-icon:hover{
+    background:rgba(255,255,255,0.15);
+    transform:translateY(-2px);
+}
+
+.nav-icon:visited{
+    color:white;
+}
+
+.nav-icon:active{
+    color:white;
+}
+
+@media(max-width:768px){
+
+    .header-icons{
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .nav-icon{
+        font-size:14px;
+        padding:6px 10px;
+    }
 
 }
 
