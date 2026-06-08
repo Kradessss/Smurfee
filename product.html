@@ -24,11 +24,27 @@
 
         <div class="header-icons">
 
-            <a href="index.html">🏠</a>
+            <a href="index.html" class="nav-icon">
 
-            <a href="cart.html">🛒</a>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    fill="currentColor"
+                    class="bi bi-house-door-fill"
+                    viewBox="0 0 16 16">
 
-            <a href="wishlist.html">❤️</a>
+                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+
+                </svg>
+
+            </a>
+
+            <a href="cart.html" class="nav-icon">
+                🛒
+            </a>
+
+            <a href="wishlist.html" class="nav-icon">❤️</a>
+
 
         </div>
 
@@ -260,49 +276,34 @@ function getReviews(productId){
 
 }
 
-function submitReview(productId){
+async function submitReview(productId){
 
     const rating =
-        document.getElementById(
-            "reviewRating"
-        ).value;
+        document.getElementById("reviewRating").value;
 
     const text =
-        document.getElementById(
-            "reviewText"
-        ).value.trim();
+        document.getElementById("reviewText").value.trim();
 
     if(text === ""){
 
-        alert(
-            "Please write a review."
-        );
-
+        alert("Please write a review.");
         return;
+
     }
 
-    const reviews =
-        getReviews(productId);
+    await addDoc(
+        collection(db,"review"),
+        {
 
-    reviews.push({
+            productId: productId,
 
-        rating,
-        text,
+            rating: Number(rating),
 
-        date:
-        new Date()
-        .toLocaleString()
+            text: text,
 
-    });
+            date: new Date().toLocaleString()
 
-    localStorage.setItem(
-
-        "reviews_" + productId,
-
-        JSON.stringify(
-            reviews
-        )
-
+        }
     );
 
     document.getElementById(
@@ -313,35 +314,57 @@ function submitReview(productId){
 
 }
 
-function loadReviews(productId){
+async function loadReviews(productId){
 
     const container =
         document.getElementById(
             "reviewList"
         );
 
-    const reviews =
-        getReviews(productId);
+    container.innerHTML =
+        "<p>Loading reviews...</p>";
+
+    const q =
+        query(
+            collection(db,"review"),
+            where(
+                "productId",
+                "==",
+                productId
+            )
+        );
+
+    const snapshot =
+        await getDocs(q);
+
+    let reviews = [];
+
+    snapshot.forEach(doc => {
+
+        reviews.push(
+            doc.data()
+        );
+
+    });
 
     container.innerHTML = "";
 
     if(reviews.length === 0){
 
         container.innerHTML =
-        "<p>No reviews yet.</p>";
+            "<p>No reviews yet.</p>";
 
         return;
+
     }
 
     let total = 0;
 
-    reviews
-    .slice()
-    .reverse()
-    .forEach(review => {
+    reviews.reverse().forEach(review => {
 
-        total +=
-        Number(review.rating);
+        total += Number(
+            review.rating
+        );
 
         container.innerHTML += `
 
@@ -364,20 +387,19 @@ function loadReviews(productId){
         </div>
 
         `;
+
     });
 
     const avg =
         (
             total /
             reviews.length
-        )
-        .toFixed(1);
+        ).toFixed(1);
 
     container.innerHTML = `
 
     <div class="average-rating">
 
-        Average Rating:
         ⭐ ${avg}/5
         (${reviews.length}
         reviews)
