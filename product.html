@@ -61,7 +61,17 @@
 <script src="cart.js"></script>
 <script src="products.js"></script>
 
-<script>
+
+<script type="module">
+
+import {
+    db,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    where
+} from "./firebase.js";
 
 const params =
     new URLSearchParams(
@@ -266,42 +276,38 @@ function decreaseQty(){
     }
 }
 
-function getReviews(productId){
-
-    return JSON.parse(
-        localStorage.getItem(
-            "reviews_" + productId
-        )
-    ) || [];
-
-}
-
 async function submitReview(productId){
 
     const rating =
-        document.getElementById("reviewRating").value;
+        document.getElementById(
+            "reviewRating"
+        ).value;
 
     const text =
-        document.getElementById("reviewText").value.trim();
+        document.getElementById(
+            "reviewText"
+        ).value.trim();
 
     if(text === ""){
 
-        alert("Please write a review.");
-        return;
+        alert(
+            "Please write a review."
+        );
 
+        return;
     }
 
     await addDoc(
         collection(db,"review"),
         {
 
-            productId: productId,
+            productId,
+            rating:Number(rating),
+            text,
 
-            rating: Number(rating),
-
-            text: text,
-
-            date: new Date().toLocaleString()
+            date:
+            new Date()
+            .toLocaleString()
 
         }
     );
@@ -324,15 +330,14 @@ async function loadReviews(productId){
     container.innerHTML =
         "<p>Loading reviews...</p>";
 
-    const q =
-        query(
-            collection(db,"review"),
-            where(
-                "productId",
-                "==",
-                productId
-            )
-        );
+    const q = query(
+        collection(db,"review"),
+        where(
+            "productId",
+            "==",
+            productId
+        )
+    );
 
     const snapshot =
         await getDocs(q);
@@ -355,7 +360,6 @@ async function loadReviews(productId){
             "<p>No reviews yet.</p>";
 
         return;
-
     }
 
     let total = 0;
@@ -371,23 +375,16 @@ async function loadReviews(productId){
         <div class="review-card">
 
             <div>
-                ${"⭐".repeat(
-                    review.rating
-                )}
+                ${"⭐".repeat(review.rating)}
             </div>
 
-            <p>
-                ${review.text}
-            </p>
+            <p>${review.text}</p>
 
-            <small>
-                ${review.date}
-            </small>
+            <small>${review.date}</small>
 
         </div>
 
         `;
-
     });
 
     const avg =
@@ -410,6 +407,9 @@ async function loadReviews(productId){
 
 }
 
+window.submitReview = submitReview;
+window.increaseQty = increaseQty;
+window.decreaseQty = decreaseQty;
 loadReviews(id);
 
 
