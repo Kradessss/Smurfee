@@ -44,7 +44,7 @@
             </a>
 
             <a href="wishlist.html" class="nav-icon">❤️</a>
-
+            <div id="userArea"></div>
 
         </div>
 
@@ -66,12 +66,14 @@
 
 import {
     db,
+    auth,
     collection,
     addDoc,
     getDocs,
     query,
     where
-} from "./firebase.js";
+}
+from "./firebase.js";
 
 const params =
     new URLSearchParams(
@@ -156,28 +158,25 @@ container.innerHTML = `
 
         <div class="product-buttons">
 
+            
             <button
-                class="btn"
-                onclick="
-                addProductQty(
-                '${product.name}',
-                ${product.price},
-                qty
-                )"
+            class="btn"
+            onclick="handleAddToCart()"
             >
-                🛒 Add To Cart
+
+            🛒 Add To Cart
+
+            </button>
+            
+            <button
+            class="wishlist-btn"
+            onclick="handleWishlist()"
+            >
+
+            ❤️ Wishlist
+
             </button>
 
-            <button
-                class="wishlist-btn"
-                onclick="
-                addToWishlist(
-                '${product.name}',
-                ${product.price}
-                )"
-            >
-                ❤️ Wishlist
-            </button>
 
         </div>
 
@@ -276,7 +275,75 @@ function decreaseQty(){
     }
 }
 
+function handleAddToCart(){
+
+    if(!auth.currentUser){
+
+        alert(
+            "Please login first to add items to cart."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    addProductQty(
+
+        product.name,
+
+        product.price,
+
+        parseInt(
+            document.getElementById(
+                "qty"
+            ).innerText
+        )
+
+    );
+
+}
+
+function handleWishlist(){
+
+    if(!auth.currentUser){
+
+        alert(
+            "Please login first to use wishlist."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    addToWishlist(
+
+        product.name,
+
+        product.price
+
+    );
+
+}
+
+
 async function submitReview(productId){
+
+    if(!auth.currentUser){
+
+        alert(
+            "Please login first."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
 
     const rating =
         document.getElementById(
@@ -295,14 +362,25 @@ async function submitReview(productId){
         );
 
         return;
+
     }
 
     await addDoc(
-        collection(db,"review"),
+    collection(db,"review"),
         {
 
             productId,
-            rating:Number(rating),
+
+            user:
+            auth.currentUser.email,
+
+            displayName:
+            auth.currentUser.email
+            .split("@")[0],
+
+            rating:
+            Number(rating),
+
             text,
 
             date:
@@ -374,13 +452,29 @@ async function loadReviews(productId){
 
         <div class="review-card">
 
-            <div>
-                ${"⭐".repeat(review.rating)}
-            </div>
+        <div class="review-user">
 
-            <p>${review.text}</p>
+            👤 ${review.displayName}
 
-            <small>${review.date}</small>
+        </div>
+
+        <div class="review-stars">
+
+            ${"⭐".repeat(review.rating)}
+
+        </div>
+
+        <p class="review-text">
+
+            ${review.text}
+
+        </p>
+
+        <small>
+
+            ${review.date}
+
+        </small>
 
         </div>
 
@@ -420,6 +514,10 @@ loadReviews(id);
         © 2026 Smurfee Marketplace
     </p>
 </footer>
+<script
+type="module"
+src="auth-ui.js">
+</script>
 </body>
 </html>
 
