@@ -1,56 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smurfee</title>
 
-<link rel="icon" type="image/png" href="images/web-logo.png">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>Smurfee Marketplace</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<link
+rel="stylesheet"
+href="home.css">
+
 </head>
+
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-    <div class="top-links">
-        <a href="seller-center.html" class="nav-icon">
+<!-- TOPBAR -->
+
+<div class="home-topbar">
+
+    <div class="home-top-links">
+
+        <a href="seller-center.html">
             🏪 Seller Center
         </a>
+
     </div>
 
-    <div class="top-links">
-        <a href="wishlist.html" class="nav-icon">❤️ Wishlist</a>
-        <a href="order.html" class="nav-icon">📦 Orders</a>
+    <div class="home-top-links">
+
+        <a href="wishlist.html">
+            🧡 Wishlist
+        </a>
+
+        <a href="order.html">
+            📦 Orders
+        </a>
+
+        <div id="userArea"></div>
+
     </div>
+
 </div>
 
 <!-- HEADER -->
-<header>
 
-    <div class="navbar">
+<header class="home-header">
 
-        <div class="logo">
-            <img src="images/logo.png" alt="Smurfee Logo">
+    <div class="home-navbar">
+
+        <div class="home-logo">
+
+            <img
+            src="images/logo.png"
+            alt="logo">
+
         </div>
 
-        <div class="search-box">
+        <!-- SEARCH -->
+
+        <div class="home-search-box">
+
+            <span class="home-search-icon">
+                🔍
+            </span>
+
             <input
-                type="text"
-                id="searchInput"
-                placeholder="Search products on Smurfee..."
-            >
+            type="text"
+            placeholder=
+            "Search products on Smurfee...">
+
         </div>
 
-        <div class="header-icons">
+        <!-- ICONS -->
 
-            <a href="wishlist.html" class="nav-icon">
+        <div class="home-header-icons">
+
+            <a
+            href="wishlist.html"
+            class="home-nav-icon">
+
                 ❤️
+
             </a>
 
-            <a href="cart.html" class="nav-icon">
+            <a
+            href="cart.html"
+            class="home-nav-icon">
+
                 🛒
-                <span id="cartCount">0</span>
+
             </a>
 
         </div>
@@ -60,51 +107,170 @@
 </header>
 
 <!-- HERO -->
-<section class="hero">
 
-    <div class="hero-content">
+<section class="home-hero">
 
-        <h1>Smurfee Super Sale </h1>
+    <div class="home-hero-content">
+
+        <h1>
+
+            Shop Smart.
+            <br>
+            Save More.
+
+        </h1>
 
         <p>
-            Discover amazing tech deals from the Smurf Village Marketplace
+
+            Discover amazing gaming,
+            audio,
+            and tech deals.
+
         </p>
 
-        <button
-            class="hero-btn"
-            onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-            Shop Now
-        </button>
+        <div class="home-hero-buttons">
+
+            <button class="home-hero-btn">
+
+                Shop Now →
+
+            </button>
+
+            <button
+            class="home-hero-btn-outline">
+
+                Browse →
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="home-features">
+
+    <div class="home-feature-card">
+
+        <div class="feature-icon">
+            🚚
+        </div>
+
+        <div>
+
+            <h3>
+                Free Shipping
+            </h3>
+
+            <p>
+                Orders over ₱999
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="home-feature-card">
+
+        <div class="feature-icon">
+            🛡️
+        </div>
+
+        <div>
+
+            <h3>
+                Secure Payment
+            </h3>
+
+            <p>
+                100% Protected Checkout
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="home-feature-card">
+
+        <div class="feature-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <h3>
+                Fast Delivery
+            </h3>
+
+            <p>
+                Nationwide Shipping
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="home-feature-card">
+
+        <div class="feature-icon">
+            🎟️
+        </div>
+
+        <div>
+
+            <h3>
+                Daily Vouchers
+            </h3>
+
+            <p>
+                Exclusive Discounts
+            </p>
+
+        </div>
 
     </div>
 
 </section>
 
 <!-- CATEGORIES -->
-<section class="categories" id="categories">
 
-    <h2>Categories</h2>
+<section class="home-categories">
 
-    <div class="category-grid">
+    <div class="home-section-header">
 
-        <div class="category" onclick="filterCategory('All')">
-            All
+        <h2>
+            Categories
+        </h2>
+
+        <a href="#">
+            View All Categories →
+        </a>
+
+    </div>
+
+    <div class="home-category-grid">
+
+        <div class="home-category-card">
+            🎮 Gaming
         </div>
 
-        <div class="category" onclick="filterCategory('Gaming')">
-            Gaming
+        <div class="home-category-card">
+            🎧 Audio
         </div>
 
-        <div class="category" onclick="filterCategory('Audio')">
-            Audio
+        <div class="home-category-card">
+            🖱️ Accessories
         </div>
 
-        <div class="category" onclick="filterCategory('Accessories')">
-            Accessories
+        <div class="home-category-card">
+            💻 Computers
         </div>
 
-        <div class="category" onclick="filterCategory('Computers')">
-            Computers
+        <div class="home-category-card">
+            📱 Mobile
         </div>
 
     </div>
@@ -112,14 +278,17 @@
 </section>
 
 <!-- FLASH DEALS -->
-<section class="flash-deals">
 
-    <div class="flash-header">
+<section class="home-flash-deals">
 
-        <h2>⚡ Flash Deals</h2>
+    <div class="home-flash-header">
+
+        <h2>
+            ⚡ Flash Deals
+        </h2>
 
         <div id="countdown">
-            02:00:00
+            01 : 59 : 32
         </div>
 
     </div>
@@ -127,19 +296,17 @@
 </section>
 
 <!-- PRODUCTS -->
-<section class="products" id="products">
 
-    <h2 class="section-title">
-        Featured Products
-    </h2>
+<section class="home-products">
 
-    <div class="product-grid" id="productGrid">
+    <div
+    class="home-product-grid"
+    id="productGrid">
 
     </div>
 
 </section>
 
-<!-- FOOTER -->
 <footer>
 
     <p>
@@ -148,36 +315,15 @@
 
 </footer>
 
+
+<script src="products.js"></script>
 <script src="cart.js"></script>
 <script src="search.js"></script>
 
-<script>
-
-/* FLASH DEAL TIMER */
-
-let seconds = 7200;
-
-setInterval(() => {
-
-    let h = Math.floor(seconds / 3600);
-
-    let m = Math.floor((seconds % 3600) / 60);
-
-    let s = seconds % 60;
-
-    document.getElementById("countdown").innerText =
-        String(h).padStart(2,"0") + ":" +
-        String(m).padStart(2,"0") + ":" +
-        String(s).padStart(2,"0");
-
-    if(seconds > 0){
-        seconds--;
-    }
-
-},1000);
-
+<script
+type="module"
+src="auth-ui.js">
 </script>
-<script src="products.js"></script>
+
 </body>
 </html>
-
