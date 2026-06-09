@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Account • Smurfee</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<link
+rel="icon"
+href="images/web-logo.png">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<div class="login-card">
+
+<img
+src="images/logo.png"
+class="login-logo">
+
+<div class="auth-tabs">
+
+<button
+class="tab active"
+onclick="showLogin()">
+
+Login
+
+</button>
+
+<button
+class="tab"
+onclick="showRegister()">
+
+Create Account
+
+</button>
+
+</div>
+
+<h1 id="authTitle">
+
+Welcome Back
+
+</h1>
+
+<p id="authSub">
+
+Login to continue
+
+</p>
+
+<input
+type="text"
+id="username"
+placeholder="Username"
+style="display:none;">
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+style="display:none;">
+
+<button
+class="btn"
+id="mainBtn">
+
+Login
+
+</button>
+
+
+<a
+href="index.html"
+class="login-back-home">
+
+← Back Home
+
+</a>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+auth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+db,
+doc,
+setDoc
+}
+from "./firebase.js";
+
+window.login =
+async function(){
+
+const email =
+document
+.getElementById(
+"email"
+)
+.value
+.trim();
+
+const password =
+document
+.getElementById(
+"password"
+)
+.value;
+
+if(
+!email ||
+!password
+){
+
+alert(
+"Fill all fields"
+);
+
+return;
+
+}
+
+try{
+
+await signInWithEmailAndPassword(
+
+auth,
+
+email,
+
+password
+
+);
+
+window.location.href =
+"index.html";
+
+}
+
+catch(error){
+
+alert(
+"Wrong email or password"
+);
+
+}
+
+};
+
+window.register=
+async function(){
+
+const username=
+document
+.getElementById(
+"username"
+)
+.value
+.trim();
+
+const email=
+document
+.getElementById(
+"email"
+)
+.value
+.trim();
+
+const password=
+document
+.getElementById(
+"password"
+)
+.value;
+
+const confirm=
+document
+.getElementById(
+"confirmPassword"
+)
+.value;
+
+if(
+!username||
+!email||
+!password
+){
+
+alert(
+"Complete all fields"
+);
+
+return;
+
+}
+
+if(
+password!==confirm
+){
+
+alert(
+"Passwords do not match"
+);
+
+return;
+
+}
+
+try{
+
+const userCredential =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+await setDoc(
+doc(
+db,
+"users",
+userCredential.user.uid
+),
+{
+username,
+email
+}
+);
+
+alert(
+"Account created!"
+);
+
+window.location.href=
+"index.html";
+
+}
+
+catch(error){
+
+alert(
+error.message
+);
+
+}
+
+};
+
+
+window.showLogin=
+function(){
+
+document
+.getElementById(
+"authTitle"
+)
+.innerText=
+"Welcome Back";
+
+document
+.getElementById(
+"authSub"
+)
+.innerText=
+"Login to continue";
+
+document
+.getElementById(
+"username"
+)
+.style.display=
+"none";
+
+document
+.getElementById(
+"confirmPassword"
+)
+.style.display=
+"none";
+
+document
+.getElementById(
+"mainBtn"
+)
+.innerText=
+"Login";
+
+document
+.getElementById(
+"mainBtn"
+)
+.onclick=
+login;
+
+};
+
+window.showRegister=
+function(){
+
+document
+.getElementById(
+"authTitle"
+)
+.innerText=
+"Create Account";
+
+document
+.getElementById(
+"authSub"
+)
+.innerText=
+"Create your Smurfee account";
+
+document
+.getElementById(
+"username"
+)
+.style.display=
+"block";
+
+document
+.getElementById(
+"confirmPassword"
+)
+.style.display=
+"block";
+
+document
+.getElementById(
+"mainBtn"
+)
+.innerText=
+"Sign Up";
+
+document
+.getElementById(
+"mainBtn"
+)
+.onclick=
+register;
+
+};
+
+showLogin();
+
+</script>
+
+</body>
+
+</html>
+
