@@ -232,25 +232,35 @@ function renderProducts() {
 
                 <div class="card-actions">
 
-                    <button
-                        class="wishlist-btn"
-                        onclick="
-                        event.stopPropagation();
-                        addToWishlist('${product.name}',${product.price})
-                        "
-                    >
-                        ❤️
-                    </button>
+                <button
+                    class="wishlist-btn"
+                    onclick="
+                    event.stopPropagation();
 
-                    <button
-                        class="btn"
-                        onclick="
-                        event.stopPropagation();
-                        addToCart('${product.name}',${product.price})
-                        "
-                    >
-                        Add To Cart
-                    </button>
+                    handleHomeWishlist(
+                    '${product.name}',
+                    ${product.price}
+                    )
+                    "
+                >
+                    ❤️
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="
+                    event.stopPropagation();
+
+                    handleHomeCart(
+                    '${product.name}',
+                    ${product.price}
+                    )
+                    "
+                >
+                Add To Cart
+                </button>
+                
+
 
                 </div>
 
@@ -315,17 +325,42 @@ function filterCategory(category){
                     ₱${product.price}
                 </p>
 
+                
+                
+                <div class="card-actions">
+
+                <button
+                    class="wishlist-btn"
+                    onclick="
+                    event.stopPropagation();
+
+                    handleHomeWishlist(
+                    '${product.name}',
+                    ${product.price}
+                    )
+                    "
+                >
+                    ❤️
+                </button>
+
                 <button
                     class="btn"
                     onclick="
                     event.stopPropagation();
-                    addToCart(
+
+                    handleHomeCart(
                     '${product.name}',
                     ${product.price}
-                    )"
+                    )
+                    "
                 >
-                    Add To Cart
+                Add To Cart
                 </button>
+
+                </div>
+
+
+
 
             </div>
 
@@ -335,3 +370,50 @@ function filterCategory(category){
     });
 
 }
+
+
+function handleHomeCart(name, price){
+
+    if(!window.currentUser){
+
+        alert(
+            "Please login first to add items to cart."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    addToCart(name, price);
+
+}
+
+
+function handleHomeWishlist(name, price){
+
+    if(!window.currentUser){
+
+        alert(
+            "Please login first to use wishlist."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    addToWishlist(name, price);
+
+}
+
+window.products = products;
+
+window.renderProducts =
+renderProducts;
+
+window.filterCategory =
+filterCategory;
+
