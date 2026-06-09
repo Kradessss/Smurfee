@@ -1,3 +1,7 @@
+
+const products =
+window.products;
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const searchInput =
