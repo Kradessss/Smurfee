@@ -44,6 +44,8 @@
                 🛒
             </a>
 
+            <div id="userArea"></div>
+
         </div>
 
     </div>
@@ -94,5 +96,37 @@
 <script>
 displayOrders();
 </script>
+<script
+type="module"
+src="auth-ui.js">
+</script>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+auth.onAuthStateChanged(user => {
+
+    if(!user){
+
+        localStorage.removeItem("orders");
+
+        alert(
+            "Please login first to view orders."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    displayOrders();
+
+});
+
+</script>
+
 
 </body>
+</html>
