@@ -176,18 +176,6 @@ const products = [
     seller: "Smurf Village Electronics",
     rating: 5,
     sold: "1k"
-},
-
-{
-    id: 17,
-    name: "Papa Smurf's Legendary Shotgun",
-    price: 9999999,
-    image: "images/shotgun.jpg",
-    category: "BlackMarket",
-    seller: "Papa Smurf Arsenal",
-    rating: 5,
-    sold: "1",
-
 }
 
 ];
