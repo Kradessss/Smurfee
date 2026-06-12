@@ -10,6 +10,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <title>Smurfee Marketplace</title>
+<link rel="icon" type="image/png" href="images/web-logo.png">
 
 <link
 rel="stylesheet"
@@ -53,54 +54,92 @@ href="home.css">
 
 <!-- HEADER -->
 
-<header class="home-header">
+<header class="modern-header">
 
-    <div class="home-navbar">
+    <div class="top-header">
 
-        <div class="home-logo">
+        <h1 class="brand">
 
-            <img
-            src="images/logo.png"
-            alt="logo">
+            Smurfee<span>Marketplace</span>
 
-        </div>
+        </h1>
 
-        <!-- SEARCH -->
-
-        <div class="home-search-box">
-
-            <span class="home-search-icon">
-                🔍
-            </span>
+        <div class="search-container">
 
             <input
             type="text"
-            placeholder=
-            "Search products on Smurfee...">
+            id="searchInput"
+            placeholder="Search gaming, audio, tech...">
+
+            <button>
+                🔍
+            </button>
 
         </div>
 
-        <!-- ICONS -->
+        <a href="cart.html" class="cart-btn">
 
-        <div class="home-header-icons">
+            🛒
 
-            <a
-            href="wishlist.html"
-            class="home-nav-icon">
+            <span id="cartCount">
+                0
+            </span>
 
-                ❤️
+        </a>
 
-            </a>
+    </div>
 
-            <a
-            href="cart.html"
-            class="home-nav-icon">
+    <!-- CATEGORY BAR -->
 
-                🛒
+    <div class="category-bar">
 
-            </a>
+        <a
+        href="#"
+        onclick="event.preventDefault(); filterCategory('Gaming')">
 
-        </div>
+            🎮 Gaming
+
+        </a>
+
+        <a
+        href="#"
+        onclick="event.preventDefault(); filterCategory('Audio')">
+
+            🎧 Audio
+
+        </a>
+
+        <a
+        href="#"
+        onclick="event.preventDefault(); filterCategory('Accessories')">
+
+            🖱 Accessories
+
+        </a>
+
+        <a
+        href="#"
+        onclick="event.preventDefault(); filterCategory('Computers')">
+
+            💻 Computers
+
+        </a>
+
+        <a
+        href="#"
+        onclick="event.preventDefault(); filterCategory('Wearables')">
+
+            📱 Wearables
+
+        </a>
+
+        <a
+        href="#"
+        class="flash">
+
+            ⚡ Flash Deals
+
+        </a>
 
     </div>
 
@@ -108,40 +147,196 @@ href="home.css">
 
 <!-- HERO -->
 
-<section class="home-hero">
+<section class="hero">
 
-    <div class="home-hero-content">
+    <div class="hero-content">
 
         <h1>
-
-            Shop Smart.
-            <br>
-            Save More.
-
+            Shop <span>Smart.</span><br>
+            Save <span>More.</span>
         </h1>
 
+        <div class="hero-buttons">
+
+
+            <a href="#"
+                class="hero-btn browse-btn"
+                onclick="openBrowse(event)">
+                    Browse →
+            </a>
+
+            <div class="hero-stats">
+
+                <div>
+                    <strong>10K+</strong>
+                    <span>Products</span>
+                </div>
+
+                <div>
+                    <strong>5K+</strong>
+                    <span>Customers</span>
+                </div>
+
+                <div>
+                    <strong>99%</strong>
+                    <span>Satisfaction</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BENEFITS -->
+
+<section class="flash-banner">
+
+    <div class="flash-left">
+
+        <span class="flash-tag">
+            🔥 FLASH SALE
+        </span>
+
+        <h2>
+            Save up to 50% on Tech Essentials
+        </h2>
+
         <p>
-
-            Discover amazing gaming,
-            audio,
-            and tech deals.
-
+            Gaming gear, audio equipment,
+            accessories and more.
         </p>
 
-        <div class="home-hero-buttons">
+    </div>
 
-            <button class="home-hero-btn">
+    <div class="flash-right">
 
-                Shop Now →
+        <div id="flashTimer" class="flash-time">
+            01:58:11
+        </div>
 
-            </button>
+        <button
+        class="flash-shop-btn"
+        onclick="
+        document
+        .getElementById('products')
+        .scrollIntoView({
+            behavior:'smooth'
+        })">
 
-            <button
-            class="home-hero-btn-outline">
+            Shop Deals →
 
-                Browse →
+        </button>
 
-            </button>
+    </div>
+
+</section>
+
+<div class="trust-row">
+
+    <span>🚚 Free Shipping Over ₱999</span>
+
+    <span>🛡 Secure Checkout</span>
+
+    <span>⚡ Fast Nationwide Delivery</span>
+
+</div>
+
+    <section class="browse-panel" id="browsePanel">
+
+    <div class="filter-search">
+
+        <input
+        type="text"
+        id="browseSearch"
+        placeholder="Search products..."
+        onkeyup="applyFilters()">
+
+    </div>
+
+    <div class="filters-grid">
+
+        <div class="filter-group">
+
+            <h4>Category</h4>
+
+            <select
+            id="categoryFilter"
+            onchange="applyFilters()">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                <option value="Gaming">
+                    Gaming
+                </option>
+
+                <option value="Audio">
+                    Audio
+                </option>
+
+                <option value="Accessories">
+                    Accessories
+                </option>
+
+                <option value="Computers">
+                    Computers
+                </option>
+
+                <option value="Wearables">
+                    Wearables
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-group">
+
+            <h4>Price Range</h4>
+
+            <input
+            type="range"
+            id="priceFilter"
+            min="0"
+            max="50000"
+            value="50000"
+            oninput="updatePrice(this.value)">
+
+            <span id="priceValue">
+                ₱50,000
+            </span>
+
+        </div>
+
+        <div class="filter-group">
+
+            <h4>Brand</h4>
+
+            <select
+            id="brandFilter"
+            onchange="applyFilters()">
+
+                <option value="">
+                    All Brands
+                </option>
+
+                <option value="Smurfee Original">
+                    Smurfee Original
+                </option>
+
+                <option value="Luxury">
+                    Luxury
+                </option>
+
+                <option value="EcoFriendly">
+                    EcoFriendly
+                </option>
+
+            </select>
 
         </div>
 
@@ -149,172 +344,161 @@ href="home.css">
 
 </section>
 
-<!-- FEATURES -->
-
-<section class="home-features">
-
-    <div class="home-feature-card">
-
-        <div class="feature-icon">
-            🚚
-        </div>
-
-        <div>
-
-            <h3>
-                Free Shipping
-            </h3>
-
-            <p>
-                Orders over ₱999
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="home-feature-card">
-
-        <div class="feature-icon">
-            🛡️
-        </div>
-
-        <div>
-
-            <h3>
-                Secure Payment
-            </h3>
-
-            <p>
-                100% Protected Checkout
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="home-feature-card">
-
-        <div class="feature-icon">
-            ⚡
-        </div>
-
-        <div>
-
-            <h3>
-                Fast Delivery
-            </h3>
-
-            <p>
-                Nationwide Shipping
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="home-feature-card">
-
-        <div class="feature-icon">
-            🎟️
-        </div>
-
-        <div>
-
-            <h3>
-                Daily Vouchers
-            </h3>
-
-            <p>
-                Exclusive Discounts
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- CATEGORIES -->
-
-<section class="home-categories">
-
-    <div class="home-section-header">
-
-        <h2>
-            Categories
-        </h2>
-
-        <a href="#">
-            View All Categories →
-        </a>
-
-    </div>
-
-    <div class="home-category-grid">
-
-        <div class="home-category-card">
-            🎮 Gaming
-        </div>
-
-        <div class="home-category-card">
-            🎧 Audio
-        </div>
-
-        <div class="home-category-card">
-            🖱️ Accessories
-        </div>
-
-        <div class="home-category-card">
-            💻 Computers
-        </div>
-
-        <div class="home-category-card">
-            📱 Mobile
-        </div>
-
-    </div>
-
-</section>
-
-<!-- FLASH DEALS -->
-
-<section class="home-flash-deals">
-
-    <div class="home-flash-header">
-
-        <h2>
-            ⚡ Flash Deals
-        </h2>
-
-        <div id="countdown">
-            01 : 59 : 32
-        </div>
-
-    </div>
 
 </section>
 
 <!-- PRODUCTS -->
 
-<section class="home-products">
+<section class="product-section" id="products">
+
+    <div class="featured-header">
+
+    <div>
+
+        <span class="featured-label">
+            TRENDING NOW
+        </span>
+
+        <h2>
+            Featured Products
+        </h2>
+
+    </div>
+
+    <div class="featured-tabs">
+
+    <button onclick="filterCategory('All')">
+        All
+    </button>
+
+    <button onclick="filterCategory('Gaming')">
+        Gaming
+    </button>
+
+    <button onclick="filterCategory('Audio')">
+        Audio
+    </button>
+
+    <button onclick="filterCategory('Accessories')">
+        Accessories
+    </button>
+
+</div>
+
+</div>
 
     <div
-    class="home-product-grid"
+    class="product-grid"
     id="productGrid">
-
     </div>
 
 </section>
 
+<!-- FOOTER -->
+
 <footer>
 
-    <p>
-        © 2026 Smurfee Marketplace
-    </p>
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>
+                Smurfee Marketplace
+            </h3>
+
+            <p>
+
+                Your trusted destination
+                for gaming gear,
+                audio equipment,
+                and tech gadgets.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Shop By Category
+            </h3>
+
+            <a href="#">
+                Gaming
+            </a>
+
+            <a href="#">
+                Audio
+            </a>
+
+            <a href="#">
+                Accessories
+            </a>
+
+            <a href="#">
+                Computers
+            </a>
+
+            <a href="#">
+                Wearables
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <a href="#">
+                Shipping Policy
+            </a>
+
+            <a href="#">
+                Return & Refund
+            </a>
+
+            <a href="#">
+                Payment Methods
+            </a>
+
+            <a href="#">
+                FAQs
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Contact Info
+            </h3>
+
+            <p>
+                📍 Dasma, Cavite
+            </p>
+
+            <p>
+                📞 +63 912 345 6789
+            </p>
+
+            <p>
+                ✉ support@smurfee.ph
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 Smurfee Marketplace.
+        All rights reserved.
+
+    </div>
 
 </footer>
-
 
 <script src="products.js"></script>
 <script src="cart.js"></script>
@@ -325,5 +509,127 @@ type="module"
 src="auth-ui.js">
 </script>
 
+<script>
+
+function toggleBenefits(){
+
+    const benefits =
+    document.getElementById("benefits");
+
+    const btn =
+    document.getElementById("benefitsBtn");
+
+    benefits.classList.toggle("collapsed");
+
+    if(
+        benefits.classList.contains("collapsed")
+    ){
+        btn.textContent =
+        "View All Benefits";
+    }
+    else{
+        btn.textContent =
+        "Hide";
+    }
+
+}
+
+function setupBenefits(){
+
+    const benefits =
+    document.getElementById("benefits");
+
+    const btn =
+    document.getElementById("benefitsBtn");
+
+    if(window.innerWidth <= 768){
+
+        benefits.classList.add("collapsed");
+
+        btn.style.display = "block";
+
+    }
+    else{
+
+        benefits.classList.remove("collapsed");
+
+        btn.style.display = "none";
+
+    }
+
+}
+
+
+
+window.addEventListener(
+    "load",
+    setupBenefits
+);
+
+window.addEventListener(
+    "resize",
+    setupBenefits
+);
+
+</script>
+
+<script>
+
+function openBrowse(event){
+
+    event.preventDefault();
+
+    const panel =
+    document.getElementById("browsePanel");
+
+    if(!panel) return;
+
+    panel.classList.add("show");
+
+    panel.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"start"
+
+    });
+
+}
+
+</script>
+
+<script>
+
+let seconds = 7200;
+
+function updateFlashTimer(){
+
+    const hours =
+    String(Math.floor(seconds / 3600))
+    .padStart(2,"0");
+
+    const minutes =
+    String(Math.floor((seconds % 3600)/60))
+    .padStart(2,"0");
+
+    const secs =
+    String(seconds % 60)
+    .padStart(2,"0");
+
+    document.getElementById("flashTimer")
+    .textContent =
+    `${hours}:${minutes}:${secs}`;
+
+    if(seconds > 0){
+        seconds--;
+    }
+
+}
+
+updateFlashTimer();
+
+setInterval(updateFlashTimer,1000);
+
+</script>
 </body>
 </html>

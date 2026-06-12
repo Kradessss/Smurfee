@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" href="images/web-logo.png">
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -47,37 +48,176 @@
     </div>
 </header>
 
-<section class="cart-container">
+<section class="checkout-page">
 
-    <h2 class="section-title">
-        Checkout
-    </h2>
+    <div class="checkout-left">
 
-    <div class="payment-box">
+        <div class="payment-box">
 
-        <h3>Choose Payment Method</h3>
+    <div class="secure-banner">
+        🔒 Secure Checkout • 100% Protected Payment
+    </div>
 
-        <label class="payment-option">
-            <input type="radio" name="payment" value="GCash" checked>
-            💙 GCash
-        </label>
+    <h3>Choose Payment Method</h3>
 
-        <label class="payment-option">
-            <input type="radio" name="payment" value="Maya">
-            💚 Maya
-        </label>
+    <label class="payment-option">
 
-        <label class="payment-option">
-            <input type="radio" name="payment" value="Credit Card">
-            💳 Credit Card
-        </label>
+        <input
+        type="radio"
+        name="payment"
+        value="GCash"
+        checked>
 
-        <label class="payment-option">
-            <input type="radio" name="payment" value="Cash on Delivery">
-            📦 Cash on Delivery
-        </label>
+        <div class="payment-info">
+
+            <img
+            src="images/payments/gcash.svg"
+            class="payment-logo"
+            alt="GCash">
+
+            <div>
+
+                <span>GCash</span>
+
+                <small>
+                    Instant mobile payment
+                </small>
+
+            </div>
+
+        </div>
+
+    </label>
+
+    <label class="payment-option">
+
+        <input
+        type="radio"
+        name="payment"
+        value="Maya">
+
+        <div class="payment-info">
+
+            <img
+            src="images/payments/maya.svg"
+            class="payment-logo"
+            alt="Maya">
+
+            <div>
+
+                <span>Maya</span>
+
+                <small>
+                    Fast and secure wallet
+                </small>
+
+            </div>
+
+        </div>
+
+    </label>
+
+    <label class="payment-option">
+
+        <input
+        type="radio"
+        name="payment"
+        value="Credit Card">
+
+        <div class="payment-info">
+
+            <img
+            src="images/payments/visa.png"
+            class="payment-logo"
+            alt="Card">
+
+            <div>
+
+                <span>Credit Card</span>
+
+                <small>
+                    Visa & Mastercard accepted
+                </small>
+
+            </div>
+
+        </div>
+
+    </label>
+
+    <label class="payment-option">
+
+        <input
+        type="radio"
+        name="payment"
+        value="Cash on Delivery">
+
+        <div class="payment-info">
+
+            <img
+            src="images/payments/cod.gif"
+            class="payment-logo"
+            alt="COD">
+
+            <div>
+
+                <span>Cash on Delivery</span>
+
+                <small>
+                    Pay when your order arrives
+                </small>
+
+            </div>
+
+        </div>
+
+    </label>
+
+</div>
 
     </div>
+
+    <div class="checkout-right">
+
+        <div class="cart-summary">
+
+            <h3>Order Summary</h3>
+
+            <div class="summary-row">
+                <span>Items</span>
+                <span id="subtotal">₱0</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>₱99</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Voucher</span>
+                <span id="discount">-₱0</span>
+            </div>
+
+            <hr>
+
+            <div class="summary-total">
+                <span>Total</span>
+                <span id="paymentTotal">₱0</span>
+            </div>
+
+            <button
+                class="checkout-btn"
+                onclick="placeOrder()">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
     <div class="voucher-box">
 
@@ -100,22 +240,13 @@
 
     </div>
 
-    <div class="cart-summary">
-
-        <h3 id="paymentTotal">
-            Total: ₱0
-        </h3>
-
-        <button
-            class="btn"
-            onclick="placeOrder()"
-        >
-            Place Order
-        </button>
-
-    </div>
-
 </section>
+
+<footer>
+    <p>
+        © 2026 Smurfee Marketplace
+    </p>
+</footer>
 
 <script src="cart.js"></script>
 
@@ -128,4 +259,5 @@ src="auth-ui.js">
 </script>
 </body>
 </html>
+
 

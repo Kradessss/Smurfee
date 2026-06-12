@@ -410,60 +410,61 @@ function getCartTotal(){
 
 function loadPaymentTotal(){
 
-    let totalEl =
-        document.getElementById(
-            "paymentTotal"
-        );
+    const cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
 
-    if(!totalEl) return;
+    let subtotal = 0;
 
-    let total =
-        getCartTotal() - discount;
+    cart.forEach(item=>{
 
-    totalEl.innerText =
-        "Total: ₱" + total;
-}
+        subtotal +=
+        item.price * item.qty;
 
-function applyVoucher(){
+    });
 
-    let code =
-        document
-        .getElementById("voucherInput")
-        .value
-        .trim()
-        .toUpperCase();
+    const shipping = 99;
 
-    let msg =
-        document.getElementById(
-            "voucherMessage"
-        );
+    let discount = 0;
 
-    discount = 0;
+    if(voucherDiscount === 10){
 
-    if(code === "SMURF50"){
+        discount =
+        subtotal * 0.10;
 
-        discount = 50;
+    }else{
 
-        msg.innerText =
-            "✅ ₱50 discount applied";
-
-    }
-    else if(code === "SMURF100"){
-
-        discount = 100;
-
-        msg.innerText =
-            "✅ ₱100 discount applied";
-
-    }
-    else{
-
-        msg.innerText =
-            "❌ Invalid voucher";
+        discount =
+        voucherDiscount;
 
     }
 
-    loadPaymentTotal();
+    const total =
+    subtotal + shipping - discount;
+
+    const subtotalEl =
+    document.getElementById("subtotal");
+
+    const discountEl =
+    document.getElementById("discount");
+
+    const totalEl =
+    document.getElementById("paymentTotal");
+
+    if(subtotalEl){
+        subtotalEl.textContent =
+        "₱" + subtotal.toLocaleString();
+    }
+
+    if(discountEl){
+        discountEl.textContent =
+        "-₱" + discount.toLocaleString();
+    }
+
+    if(totalEl){
+        totalEl.textContent =
+        "₱" + total.toLocaleString();
+    }
+
 }
 
 function placeOrder(){
@@ -593,3 +594,46 @@ function addProductQty(
 
 }
 
+let voucherDiscount = 0;
+
+function applyVoucher(){
+
+    const code =
+    document.getElementById("voucherInput")
+    .value
+    .trim()
+    .toUpperCase();
+
+    const msg =
+    document.getElementById("voucherMessage");
+
+    if(code === "SMURF10"){
+
+        voucherDiscount = 10;
+
+        msg.textContent =
+        "✅ 10% discount applied";
+
+    }
+
+    else if(code === "WELCOME100"){
+
+        voucherDiscount = 100;
+
+        msg.textContent =
+        "✅ ₱100 discount applied";
+
+    }
+
+    else{
+
+        voucherDiscount = 0;
+
+        msg.textContent =
+        "❌ Invalid voucher";
+
+    }
+
+    loadPaymentTotal();
+
+}

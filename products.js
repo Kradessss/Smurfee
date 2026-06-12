@@ -8,7 +8,8 @@ const products = [
     category: "Gaming",
     seller: "Papa Smurf Tech",
     rating: 5,
-    sold: "2.4k"
+    sold: "2.4k",
+    topSeller:true,
 },
 
 {
@@ -63,7 +64,8 @@ const products = [
     category: "Gaming",
     seller: "Papa Smurf Tech",
     rating: 5,
-    sold: "900"
+    sold: "900",
+    topSeller:true
 },
 
 {
@@ -192,7 +194,8 @@ const products = [
 
 function renderProducts() {
 
-    const container = document.getElementById("productGrid");
+    const container =
+    document.getElementById("productGrid");
 
     if(!container) return;
 
@@ -201,73 +204,79 @@ function renderProducts() {
     products.forEach(product => {
 
         container.innerHTML += `
-        <div class="card"
-        onclick="window.location.href='product.html?id=${product.id}'">
 
-            <img src="${product.image}">
+        <div class="card"
+            onclick="window.location.href='product.html?id=${product.id}'">
+
+                ${product.topSeller ? `
+                <div class="top-seller">
+                    TOP SELLER
+                </div>
+                ` : ""}
+
+            <img src="${product.image}" alt="${product.name}">
 
             <div class="card-body">
 
                 <h3>${product.name}</h3>
 
-                <div class="rating">
-                    ${"⭐".repeat(product.rating)}
-                </div>
-
-                <p class="sold">
-                    Sold ${product.sold}
-                </p>
-
                 <p class="seller">
                     ${product.seller}
+                    • Sold ${product.sold || 0}
                 </p>
 
-                <p class="shipping">
-                    🚚 Free Shipping
-                </p>
+                <div class="rating">
+                    ${"⭐".repeat(product.rating || 5)}
+                </div>
 
-                <p class="price">
-                    ₱${product.price}
-                </p>
+                <div class="price-row">
 
-                <div class="card-actions">
+    <span class="price">
+        ₱${Number(product.price).toLocaleString()}
+    </span>
 
-                <button
+    <span class="shipping">
+        🚚 Free Shipping
+    </span>
+
+</div>
+
+            <div class="card-actions">
+
+                    <button
                     class="wishlist-btn"
                     onclick="
                     event.stopPropagation();
-
                     handleHomeWishlist(
                     '${product.name}',
                     ${product.price}
-                    )
-                    "
-                >
-                    ❤️
-                </button>
+                    )">
 
-                <button
-                    class="btn"
+                        ❤️
+
+                    </button>
+
+                    <button
+                    class="add-cart-btn"
                     onclick="
                     event.stopPropagation();
-
                     handleHomeCart(
                     '${product.name}',
                     ${product.price}
-                    )
-                    "
-                >
-                Add To Cart
-                </button>
-                
+                    )">
 
+                        Add to Cart
+
+                    </button>
 
                 </div>
 
             </div>
 
         </div>
+
         `;
+
     });
 
 }
