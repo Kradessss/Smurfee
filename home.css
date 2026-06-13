@@ -2283,3 +2283,30 @@ footer{
     gap:20px;
 }
 
+html,
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    display:block !important;
+}
+
+.modern-header,
+.hero,
+.flash-banner,
+.trust-row,
+.product-section,
+footer{
+    width:100%;
+    max-width:100%;
+}
+
+.hero,
+.flash-banner,
+.product-section{
+    margin-left:auto;
+    margin-right:auto;
+}
