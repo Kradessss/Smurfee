@@ -2311,27 +2311,3 @@ footer{
     margin-right:auto;
 }
 
-.logo {
-    font-size: 2.5rem; /* reduce if needed */
-    text-align: center;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* allows items to wrap instead of overlapping */
-}
-
-@media (max-width: 768px) {
-    .logo {
-        font-size: 1.8rem;
-    }
-
-    .navbar {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
