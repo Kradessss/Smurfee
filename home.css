@@ -1885,30 +1885,22 @@ footer{
 }
 
 .flash-banner{
-
-    max-width:1400px;
-
+    max-width:1200px;   /* or 1100px */
+    width:90%;
     margin:-40px auto 20px;
 
-    background:white;
-
+    background:#fff;
     border-radius:20px;
-
     padding:30px 40px;
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     gap:30px;
 
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.08);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 
     position:relative;
-
     z-index:5;
 }
 
@@ -2334,7 +2326,6 @@ body{
 
 .modern-header,
 .hero,
-.flash-banner,
 .trust-row,
 .product-section,
 footer{
