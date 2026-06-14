@@ -276,26 +276,22 @@ document.addEventListener(
 
 function filterCategory(category){
 
-    const container =
-        document.getElementById("productGrid");
+    const container = document.getElementById("productGrid");
+
+    if(!container) return;
+
+    // Scroll to products
+    document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+    });
+
+    // Filter products
+    const filteredProducts =
+        category === "All"
+        ? products
+        : products.filter(product => product.category === category);
 
     container.innerHTML = "";
-
-    let filteredProducts;
-
-    if(category === "All"){
-
-        filteredProducts = products;
-
-    }else{
-
-        filteredProducts =
-            products.filter(
-                product =>
-                product.category === category
-            );
-
-    }
 
     filteredProducts.forEach(product => {
 
@@ -304,60 +300,52 @@ function filterCategory(category){
         <div class="card"
         onclick="window.location.href='product.html?id=${product.id}'">
 
-            <img src="${product.image}">
+            ${product.topSeller ? `
+            <div class="top-seller">
+                TOP SELLER
+            </div>` : ""}
+
+            <img src="${product.image}" alt="${product.name}">
 
             <div class="card-body">
 
                 <h3>${product.name}</h3>
 
+                <p class="seller">
+                    ${product.seller} • Sold ${product.sold || 0}
+                </p>
+
                 <div class="rating">
                     ${"⭐".repeat(product.rating)}
                 </div>
 
-                <p class="seller">
-                    ${product.seller}
-                </p>
+                <div class="price-row">
 
-                <p class="price">
-                    ₱${product.price}
-                </p>
+                    <span class="price">
+                        ₱${Number(product.price).toLocaleString()}
+                    </span>
 
-                
-                
-                <div class="card-actions">
-
-                <button
-                    class="wishlist-btn"
-                    onclick="
-                    event.stopPropagation();
-
-                    handleHomeWishlist(
-                    '${product.name}',
-                    ${product.price}
-                    )
-                    "
-                >
-                    ❤️
-                </button>
-
-                <button
-                    class="btn"
-                    onclick="
-                    event.stopPropagation();
-
-                    handleHomeCart(
-                    '${product.name}',
-                    ${product.price}
-                    )
-                    "
-                >
-                Add To Cart
-                </button>
+                    <span class="shipping">
+                        🚚 Free Shipping
+                    </span>
 
                 </div>
 
+                <div class="card-actions">
 
+                    <button
+                        class="wishlist-btn"
+                        onclick="event.stopPropagation(); handleHomeWishlist('${product.name}', ${product.price})">
+                        ❤️
+                    </button>
 
+                    <button
+                        class="add-cart-btn"
+                        onclick="event.stopPropagation(); handleHomeCart('${product.name}', ${product.price})">
+                        Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
